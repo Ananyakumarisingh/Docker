@@ -1,52 +1,83 @@
 # Docker
-## What you need to know 
-* Atleast 3 months of programming experience & You should have built atlest 1 aaplication. So you should know concepts like __backend__, __frontend__, __API__ and __database__.
-* Basic git commands like __cloning__, __commiting__, __pushing__ and __pulling__.
-## In this section
-### __What is Docker?__
-    
-    A platfrom for building, running and shipping applications in a consistant manner. So if your application works on your development machine it can run and function the same way other machines.
-    
-        If you have been developing software application for a while you've probably come across this situation where your application works on you development machinebut doesn't somewhere else can you think of three reasons, why?
-        
-        This can happen because of 3 reasons:
-        1. One or more files are missing
-        2. Software version mismatch   // If the target machine is running a different vresion of some software that your application needs. Let's say your application needs node version 14 but the target machine is running node version 9.
-        3. Different configuration settings // The environment variables
-__`Packages needed - Node 14, Mongo 14, App`__
 
-If someone joins you team they don't have to spend their time in setting up a new machine to run your application they don't have to install and configure all these dependencies they simple tell docker to bring up your application and docker itself will automatically run these dependencies inside an isolated environment called a __container__. This isolated environment allows multiple applications use different versions of some software side by side. So, one application may user node version 14 another may use node version 9. Both these applications can run side by sidewithout messing with each other. So, this is how __docker__ allows us to consistently run an application on different machines.
+### Containers
+Your basic isolated __Docker__ process. Containers are to virtual machines, as threads are to processes. Or you can think of them as larger-than-life `chroot` environments.
 
-```bash
-    docker-compose up
-```
-And there is one more benefit, when we're done with one of the applications and don't want to work on it anymore we can remove the appliaction and all its dependencies in one go. 
+### Lifecycle
 
-As we work on different projects our development machine gets cluttered with so many libraries and tools that are used by different applications and after a while don't know if we can remove one ore more of these tools because we are always afraid that we would mess up with some application with docker we don't have to worry about this becauseeach application runs with its dependencies inside an isolated environment we can safely remove an application with all its dependencies to clean up our machine.
+- __docker create__ - Creates a container but doesn't start it
+- __docker rename__ - Allows the container to be renamed
+- __docker run__ - Creates and start a container in one operation
+- __docker rm__ - Deletes a container
+- __docker update__ - Updates a container's resource limits
+- __docker run --rm__ - Removes container when stopped
+- __docker run -v $HOSTDIR-$DOCKERDIR__ - Maps a directory on the host to the Docker container; see also Volumes
+- __docker run -v__ - Removes volumes associed with container
+- __docker run --log-driver=syslog__ - Runs Docker with custom log driver
 
-```bash
-    docker-compose down --rmi all
-```
+### Starting and Stopping
 
-### __Virtual Machine vs Containers__
+- __docker start__ - Starts a container, so it is running
+- __docker stop__ - Stops a running container
+- __docker restart__ - Stops and starts a container
+- __docker pause__ - Pauses a running container, "freezing" it in place
+- __docker unpause__ - Unpauses a running container
+- __docker run wait__ - Blocks until running container stops
+- __docker run kill__ - Sends a SIGKILL to a running container
+- __docker run attach__ - Connects to a running container
 
-| Virtual Machine | Containers |
-| :----- | :----- |
-|  |  |
-|  |  |
-|  |  |
-|  |  |
-|  |  |
-|  |  |
+If you want to integrate a container with a hpst process manager, start the daemon with `-r=false` then use docker `start -a`.
+
+If you want to expose container ports through the host, see the exposing ports section.
+
+### Information on Docker Containers, Processes and Performance
+
+- __docker ps__ - Shows running containers
+- __docker logs__ - Gets logs from container; you can use a custom log driver, but logs are only available for `json-file` and `journald` in 1.10
+- __docker inspect__ - Looks at all info on a container (including IP address)
+- __docker evens__ - Gets events from container
+- __docker port__ - Shows public facing port to container
+- __docker top__ - Shows running processes in container
+- __docker stats__ - Shows containers' resource usage statistics
+- __docker diff__ - Shows changed files in the container's filesystem
+- __docker ps -a__ - Shows running and stopped containers
+- __docker stats --all__ - Shows a running list of containers
+
+### Import/Export (Backup/Restore)
+
+- __docker cp__ - Copies files or folders between a container and the local filesystem
+- __docker export__ - Turns container filesystem into tarball archive stream to STDOUT
+
+### Executing Commands
+
+- __docker exec__ - Executes a command in container
+
+To enter a running container, attach a new shell process to a running container called foo, use: 
+````bash
+docker exec -it foo /bin/bash
+````
+
+### Images
+Images are templates that Docker containers are based on. They are the foundation layer from which your container is launched, and your changed then become independent from it (as another layer)
+
+### Lifecycle of Containers (Create, Run , Build, Commit)
+
+- __docker images__ - Shows all images
+- __docker import__ - Creates image from a tarball
+- __docker build__ - Creates image from Dockerfile
+- __docker commit__ - Creates an image from a container, pausing it temporarily if it is running 
+- __docker rmi__ - Removes an image
+- __docker load__ - Removes an image from a tar archive as STDIN, including images and tags (as of 0.7)
+- __docker save__ - Saves an image to a tar archive stream to STDOUT with all parent layers, tags and versions (as of 0.7)
+
+### Info
+
+- __docker history__ - Shows history of image
+- __docker tag__ - Tags an image to a name (local or registry)
+
+### Cleaning up
 
 
 
 
-### __Architecture of Docker__
-
-
-### __Installing Docker__
-
-
-### __Development Workflow__
 
