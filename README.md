@@ -30,6 +30,16 @@ As we work on different projects our development machine gets cluttered with so 
 
 ### __Virtual Machine vs Containers__
 
+| Virtual Machine | Containers |
+| :----- | :----- |
+|  |  |
+|  |  |
+|  |  |
+|  |  |
+|  |  |
+|  |  |
+
+
 
 
 ### __Architecture of Docker__
